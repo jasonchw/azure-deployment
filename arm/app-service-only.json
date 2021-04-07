@@ -1,0 +1,80 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "appServicePlanName": {
+            "type": "string",
+            "defaultValue": "plan-my-app-service-plan",
+            "metadata": {
+                "description": "App Service plan name"
+            }
+        },
+        "appServicePlanSku": {
+            "type": "string",
+            "defaultValue": "S1",
+            "metadata": {
+                "description": "App Service plan SKU"
+            }
+        },
+        "appServiceName": {
+            "type": "string",
+            "defaultValue": "app-my-app-service",
+            "metadata": {
+                "description": "App Service name"
+            }
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('appServicePlanName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "[parameters('appServicePlanSku')]"
+            },
+            "kind": "linux",
+            "properties": {
+                "reserved": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('appServiceName')]",
+            "location": "[parameters('location')]",
+            "kind": "app",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+                "clientAffinityEnabled": true,
+                "httpsOnly": true,
+                "siteConfig": {
+                    "linuxFxVersion": "TOMCAT|9.0-jre8",
+                    "alwaysOn": true,
+                    "ftpsState": "FtpsOnly",
+                    "appSettings": [
+                        {
+                            "name": "JAVA_OPTS",
+                            "value": "-XX:StartFlightRecording=disk=true,name=continuous_recording,dumponexit=true,maxsize=1024m,maxage=1d"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+            ]
+        }
+    ]
+}
