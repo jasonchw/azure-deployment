@@ -12,5 +12,5 @@ az group create --location eastus --name my-resource-group
 ## App Service 
 Execute `az deployment group create` to deploy the App Service (only),
 ```
-az deployment group create -g my-resource-group -f ./app-service-only.json
+az deployment group create -g my-resource-group -f ./arm/app-service-only.json
 ```
