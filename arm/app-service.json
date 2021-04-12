@@ -11,7 +11,7 @@
         },
         "appServicePlanName": {
             "type": "string",
-            "defaultValue": "plan-my-app-service-plan",
+            "defaultValue": "plan-alpha",
             "metadata": {
                 "description": "App Service plan name"
             }
@@ -25,7 +25,7 @@
         },
         "appServiceName": {
             "type": "string",
-            "defaultValue": "app-my-app-service",
+            "defaultValue": "app-alpha",
             "metadata": {
                 "description": "App Service name"
             }
