@@ -18,7 +18,7 @@
     },
     "redisName": {
       "type": "string",
-      "defaultValue": "redis-alpha",
+      "defaultValue": "redis-alpha-01",
       "metadata": {
         "description": "Redis name"
       }

@@ -4,14 +4,14 @@ param location string = resourceGroup().location
 
 // parameters - app service plan
 @description('App Service plan name')
-param appServicePlanName string = 'plan-alpha'
+param appServicePlanName string = 'plan-alpha-01'
 
 @description('App Service plan SKU')
 param appServicePlanSku string = 'S1'
 
 // parameters - app service
 @description('App Service name')
-param appServiceName string = 'app-alpha'
+param appServiceName string = 'app-alpha-01'
 
 
 // resources

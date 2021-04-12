@@ -4,7 +4,7 @@ param location string = resourceGroup().location
 
 // parameters - redis
 @description('Redis name')
-param redisName string = 'redis-alpha'
+param redisName string = 'redis-alpha-01'
 
 @allowed([
   'Basic'
