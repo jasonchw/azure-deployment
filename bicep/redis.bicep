@@ -2,7 +2,7 @@
 param location string = resourceGroup().location
 
 
-// parameters
+// parameters - redis
 @description('Redis name')
 param redisName string = 'redis-alpha'
 
@@ -25,7 +25,7 @@ param redisSkuFamily string = 'C'
 param redisSkuCapacity int = 0
 
 
-// resource
+// resources
 resource redis 'Microsoft.Cache/Redis@2019-07-01' = {
   name: redisName
   location: location
